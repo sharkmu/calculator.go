@@ -4,25 +4,48 @@ import "fmt"
 
 func main() {
 	var operation string
-	var num1 int
-	var num2 int
-	var op_name string
+	var num1 float64
+	var num2 float64
+	var opName string
 
 	fmt.Print("Choose an operation ( +, -, *, : ) ")
 	fmt.Scan(&operation)
 	switch operation {
 	case "+":
-		op_name = "add to"
+		opName = "add to"
 	case "-":
-		op_name = "subtract from"
+		opName = "subtract from"
 	case "*":
-		op_name = "multiply"
+		opName = "multiply"
 	case ":":
-		op_name = "divide"
+		opName = "divide"
 	}
 
-	fmt.Print("Type the number that you want to ", op_name, ": ")
+	fmt.Print("Type the number that you want to ", opName, ": ")
 	fmt.Scan(&num1)
 	fmt.Print("The other number: ")
 	fmt.Scan(&num2)
+
+	if (operation == ":" || operation == "/") && num2 == 0 {
+		fmt.Println("You can't divide with zero (0).")
+	} else {
+		fmt.Println("After thorough calculations, the result is: ", calc(operation, num1, num2))
+	}
+}
+
+func calc(op string, n1 float64, n2 float64) (result float64) {
+	switch op {
+	case "+":
+		result = n1 + n2
+	case "-":
+		result = n1 - n2
+	case "*":
+		result = n1 * n2
+	case ":", "/":
+		if n2 != 0 {
+			result = n1 / n2
+		}
+	}
+
+	return
 }
